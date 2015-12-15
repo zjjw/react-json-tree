@@ -56,7 +56,8 @@ export default class JSONIterableNode extends React.Component {
   getChildNodes() {
     if (this.state.expanded && this.needsChildNodes) {
       let childNodes = [];
-      for (const entry of this.props.data) {
+      let entries = Object.keys(this.props.data).sort();
+      entries.forEach((entry) => {
         let key = null;
         let value = null;
         if (Array.isArray(entry)) {
@@ -74,7 +75,7 @@ export default class JSONIterableNode extends React.Component {
         if (node !== false) {
           childNodes.push(node);
         }
-      }
+      });
       this.needsChildNodes = false;
       this.renderedChildren = childNodes;
     }

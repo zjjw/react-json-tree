@@ -55,7 +55,8 @@ export default class JSONObjectNode extends React.Component {
     if (this.state.expanded && this.needsChildNodes) {
       const obj = this.props.data;
       let childNodes = [];
-      for (let k in obj) {
+      let keys = Object.keys(obj).sort();
+      keys.forEach((k) => {
         if (obj.hasOwnProperty(k)) {
           let prevData;
           if (typeof this.props.previousData !== 'undefined' && this.props.previousData !== null) {
@@ -66,7 +67,7 @@ export default class JSONObjectNode extends React.Component {
             childNodes.push(node);
           }
         }
-      }
+      });
       this.needsChildNodes = false;
       this.renderedChildren = childNodes;
     }
